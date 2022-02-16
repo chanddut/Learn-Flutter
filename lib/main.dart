@@ -1,4 +1,3 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -331,62 +330,110 @@ void main() {
 //   }
 // }
 
-class MyApp extends StatelessWidget {
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text("Fitur Text Field"),
+//         ),
+//         body: Center(
+//           child: Padding(
+//             padding: const EdgeInsets.all(20),
+//             child: TextField(
+//               // Fitur
+//               enabled: true,
+//               autocorrect: true,
+//               autofocus: true,
+//               enableInteractiveSelection: true,
+//               obscureText: true,
+//               obscuringCharacter: "*",
+//               keyboardType: TextInputType.phone,
+//               readOnly: false,
+
+//               // Decoration
+//               autocorrect: false,
+//               showCursor: true,
+//               cursorColor: Colors.grey,
+//               cursorHeight: 25,
+//               cursorWidth: 3,
+//               cursorRadius: Radius.circular(20),
+//               obscureText: true,
+
+//               textAlign: TextAlign.start,
+//               textAlignVertical: TextAlignVertical.center,
+//               textCapitalization: TextCapitalization.words,
+//               style: TextStyle(fontSize: 20),
+
+//               decoration: InputDecoration(
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(20),
+//                   ),
+//                   focusedBorder: OutlineInputBorder(
+//                       borderSide: BorderSide(color: Colors.grey)),
+//                   enabledBorder: OutlineInputBorder(
+//                       borderSide: BorderSide(color: Colors.black)),
+//                   prefixIcon: Icon(
+//                     Icons.person,
+//                     size: 35,
+//                   ),
+//                   suffixIcon: Icon(Icons.remove_red_eye),
+//                   // prefixText: "username : ",
+//                   labelText: "Username",
+//                   hintText: "Please insert your username"),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final TextEditingController myController = TextEditingController();
+
+  String hasil = "Hasil Input";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Fitur Text Field"),
+          title: Text("Text Field"),
         ),
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: TextField(
-              // Fitur
-              // // enabled: false,
-              // autocorrect: true,
-              // autofocus: true,
-              // enableInteractiveSelection: true,
-              // obscureText: true,
-              // obscuringCharacter: "*",
-              // keyboardType: TextInputType.phone,
-              // // readOnly: true,
-
-              // Decoration
-              autocorrect: false,
-              showCursor: true,
-              cursorColor: Colors.grey,
-              cursorHeight: 25,
-              cursorWidth: 3,
-              cursorRadius: Radius.circular(20),
-              obscureText: true,
-
-              textAlign: TextAlign.start,
-              textAlignVertical: TextAlignVertical.center,
-              textCapitalization: TextCapitalization.words,
-              style: TextStyle(fontSize: 20),
-
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  prefixIcon: Icon(
-                    Icons.person,
-                    size: 35,
-                  ),
-                  suffixIcon: Icon(Icons.remove_red_eye),
-                  // prefixText: "username : ",
-                  labelText: "Username",
-                  hintText: "Please insert your username"),
-            ),
+            child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextField(
+                controller: myController,
+                onChanged: (value) {
+                  print("ONCHANGED");
+                },
+                onSubmitted: (value) {
+                  print(value);
+                  setState(() {
+                    hasil = value;
+                  });
+                },
+                onEditingComplete: () {
+                  print("Edit Success");
+                  print(myController.text);
+                },
+              ),
+              Text(hasil)
+            ],
           ),
-        ),
+        )),
       ),
     );
   }

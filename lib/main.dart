@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -391,50 +392,158 @@ void main() {
 //   }
 // }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+// class MyApp extends StatefulWidget {
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
 
-class _MyAppState extends State<MyApp> {
-  final TextEditingController myController = TextEditingController();
+// class _MyAppState extends State<MyApp> {
+//   final TextEditingController myController = TextEditingController();
 
-  String hasil = "Hasil Input";
+//   String hasil = "Hasil Input";
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text("Text Field"),
+//         ),
+//         body: Center(
+//             child: Padding(
+//           padding: const EdgeInsets.all(25),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               TextField(
+//                 controller: myController,
+//                 onChanged: (value) {
+//                   print("ONCHANGED");
+//                 },
+//                 onSubmitted: (value) {
+//                   print(value);
+//                   setState(() {
+//                     hasil = value;
+//                   });
+//                 },
+//                 onEditingComplete: () {
+//                   print("Edit Success");
+//                   print(myController.text);
+//                 },
+//               ),
+//               Text(hasil)
+//             ],
+//           ),
+//         )),
+//       ),
+//     );
+//   }
+// }
+
+// class MyApp extends StatelessWidget {
+//   final List<Container> myList = List.generate(90, (index) {
+//     return Container(
+//       color: Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256),
+//           Random().nextInt(256)),
+//     );
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text("Grid View"),
+//           centerTitle: true,
+//         ),
+//         body: // GridView(
+//             //   padding: EdgeInsets.all(10),
+//             //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//             //     crossAxisCount: 3,
+//             //     mainAxisSpacing: 10,
+//             //     crossAxisSpacing: 10,
+//             //     childAspectRatio: 4 / 3,
+//             //   ),
+//             //  children: myList,
+
+//             //Easiest Way
+//             GridView.count(
+//           crossAxisCount: 3,
+//           mainAxisSpacing: 10,
+//           crossAxisSpacing: 10,
+//           childAspectRatio: 4 / 3,
+//           padding: EdgeInsets.all(10),
+//           children: myList,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Text Field"),
-        ),
-        body: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextField(
-                controller: myController,
-                onChanged: (value) {
-                  print("ONCHANGED");
-                },
-                onSubmitted: (value) {
-                  print(value);
-                  setState(() {
-                    hasil = value;
-                  });
-                },
-                onEditingComplete: () {
-                  print("Edit Success");
-                  print(myController.text);
-                },
-              ),
-              Text(hasil)
-            ],
-          ),
-        )),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String data = "Belum ada input";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Decoration"),
       ),
+      body: Center(
+          child: Text(
+        data,
+        style: TextStyle(fontSize: 35),
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("Telah Di klik");
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(
+                    "Confirm Exit",
+                    textAlign: TextAlign.center,
+                  ),
+                  content: Text("Are you sure want to delete this item ?"),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            data = "False";
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("No")),
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            data = "True";
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Yes")),
+                  ],
+                );
+              });
+        },
+        child: Icon(Icons.delete),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

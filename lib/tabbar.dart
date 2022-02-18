@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
               height: 1000,
               color: Colors.purple,
             ),
-            title: Text("My Apps"),
+            title: Text("TabBar"),
             bottom: TabBar(
               labelStyle: TextStyle(fontWeight: FontWeight.bold),
               unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),

@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pages/page1.dart';
+import 'package:flutter_application_1/Pages/photo_page.dart';
+import './Pages/home_page.dart';
+import 'Pages/gallery_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -307,7 +310,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: page1(),
+      home: HomePage(),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => HomePage(),
+        GalleryPage.routeName: (context) => GalleryPage(),
+        PhotoPage.routeName: (context) => PhotoPage()
+      },
     );
   }
 }
